@@ -5,11 +5,11 @@ import Recipe from "./components/Recipe";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-slate-100">
       <Main/>
       <Random/>
-      <Like/>
       <Recipe/>
+      <Like/>
     </div>
   );
 }
