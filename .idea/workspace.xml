@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="70e01af0-f6c0-4002-b1e2-1676712e04b4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food-recipe/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/food-recipe/src/components/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food-recipe/src/components/Login_button.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/food-recipe/src/components/Login_button.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/food-recipe/src/components/Main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/food-recipe/src/components/Main.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/food-recipe/src/components/SlideImg_main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/food-recipe/src/components/SlideImg_main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food-recipe/src/context/DataContext.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/food-recipe/src/context/DataContext.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food-recipe/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/food-recipe/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +44,7 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="home" />
-                    <option name="lastUsedInstant" value="1714471714" />
+                    <option name="lastUsedInstant" value="1714721222" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="main" />
@@ -80,10 +80,10 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;home&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/happy/바탕화면/kosta/food-recipe/food-recipe&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/happy/바탕화면/kosta/food-recipe/food-recipe/src/components&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -106,7 +106,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\happy\바탕화면\kosta\food-recipe\food-recipe\src\components" />
       <recent name="C:\Users\happy\바탕화면\kosta\food-recipe\food-recipe\db-server" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\happy\바탕화면\kosta\food-recipe\food-recipe\public" />
     </key>
   </component>
   <component name="RunManager">
@@ -146,7 +150,8 @@
       <workItem from="1714717618297" duration="153000" />
       <workItem from="1714717799346" duration="17000" />
       <workItem from="1714717838223" duration="29000" />
-      <workItem from="1714717902479" duration="2053000" />
+      <workItem from="1714717902479" duration="6614000" />
+      <workItem from="1714728158515" duration="4070000" />
     </task>
     <servers />
   </component>

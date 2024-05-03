@@ -1,20 +1,22 @@
 import {useContext, useEffect, useMemo, useState} from "react";
+import {useNavigate} from "react-router-dom";
+
 import DataContext from "../context/DataContext";
 
 
 export default function SlideImg_main({text, onClick, type}) {
 
-  const datas = useContext(DataContext);
-  const data = datas;
-  const [currentIndex, setCurrentIndex] = useState();
+  const data = useContext(DataContext);
 
+  const [currentIndex, setCurrentIndex] = useState();
   const imgSrcList = useMemo(() => data ? data.map(item => item.ATT_FILE_NO_MK) : []); // 여기를 수정함
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (data.length) {
       setCurrentIndex(Math.floor(Math.random() * imgSrcList.length));
     }
-    }, [imgSrcList.length]); // 의존성 배열에 data.length와 imgSrcList.length 추가
+  }, [imgSrcList.length]); // 의존성 배열에 data.length와 imgSrcList.length 추가
 
 
   useEffect(() => {
@@ -39,10 +41,13 @@ export default function SlideImg_main({text, onClick, type}) {
   const prevButton = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + imgSrcList.length) % imgSrcList.length);
   };
-
+  const mainClick = () => {
+    navigate("/recipe", { state: { recipeData: data[currentIndex] } });
+  };
   return (
-    <div className = {`relative w-full bg-blue-200 rounded-3xl mb-0 mr-1 ml-1 ${type === 'main' ? 'mt-16' : 'mt-0'}`}
-         onClick = {onClick}>
+    <div
+      className = {`relative w-full bg-blue-200 rounded-3xl mb-0 mr-1 ml-1 ${type === 'main' ? 'mt-16' : 'mt-0'}`}
+      onClick = {type === "main" ? mainClick : onClick}>
       {/* 화살표 버튼만을 위한 컨테이너 */}
       {type === "main" ?
         <div className = "absolute inset-0 z-10 flex justify-between items-center w-full">
