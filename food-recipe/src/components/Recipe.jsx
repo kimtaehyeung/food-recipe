@@ -13,6 +13,7 @@ export default function Recipe(){
             setIsloading(false)
         }
     }
+    
     useEffect(()=>{ 
         getRecipe()
     },[])

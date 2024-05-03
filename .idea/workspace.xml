@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="70e01af0-f6c0-4002-b1e2-1676712e04b4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food-recipe/src/components/Main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/food-recipe/src/components/Main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food-recipe/src/components/SlideImg_main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/food-recipe/src/components/SlideImg_main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food-recipe/src/context/DataContext.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/food-recipe/src/context/DataContext.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food-recipe/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/food-recipe/src/index.js" afterDir="false" />
-    </list>
+
+    <list default="true" id="70e01af0-f6c0-4002-b1e2-1676712e04b4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,12 +38,13 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="home" />
-                    <option name="lastUsedInstant" value="1714721222" />
+
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1714732747" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1714471713" />
+                    <option name="branchName" value="home" />
+                    <option name="lastUsedInstant" value="1714721222" />
                   </RecentBranch>
                 </list>
               </option>
@@ -76,25 +72,27 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;home&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/happy/바탕화면/kosta/food-recipe/food-recipe/src/components&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\happy\\AppData\\Local\\Programs\\IntelliJ IDEA Ultimate 2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/happy/바탕화면/kosta/food-recipe/food-recipe/src/components",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\happy\\AppData\\Local\\Programs\\IntelliJ IDEA Ultimate 2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -151,7 +149,9 @@
       <workItem from="1714717799346" duration="17000" />
       <workItem from="1714717838223" duration="29000" />
       <workItem from="1714717902479" duration="6614000" />
-      <workItem from="1714728158515" duration="4070000" />
+
+      <workItem from="1714728158515" duration="4423000" />
+
     </task>
     <servers />
   </component>
