@@ -4,11 +4,24 @@ import SlideImg_main from "./SlideImg_main";
 import {useNavigate} from "react-router-dom";
 import DataContext from "../context/DataContext";
 
-
 export default function Main() {
-  const api_key = "bf1d888d9a624d488780";
-  const url = `http://openapi.foodsafetykorea.go.kr/api/${api_key}/COOKRCP01/json/1/100/`
+  const [api_key, setApi_key] = useState("");
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    return () => {
+      fetch("/api-key.txt").then(response => response.text())
+        .then(d => {
+          setApi_key(d)
+          return d
+        })
+        .then((api) => setUrl(`http://openapi.foodsafetykorea.go.kr/api/${api}/COOKRCP01/json/1/100/`));
+    };
+  }, []);
+  // RCP_NM="새우 두부 계란찜"
+  console.log(api_key);
+  console.log(url);
   // const url = `http://openapi.foodsafetykorea.go.kr/api/sample/COOKRCP01/json/1/1`;
+
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [user, setUser] = useState("");
@@ -23,12 +36,10 @@ export default function Main() {
       return setData(data.COOKRCP01.row);
     }).catch(error => console.log("Fetching Error"));
 
-  }, []);
+  }, [api_key]);
 
 
-  const mainClick = () => {
 
-  };
   const toRandom = () => {
     navigate("/random");
   }
