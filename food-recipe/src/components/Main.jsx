@@ -11,6 +11,7 @@ export default function Main() {
   // const url = `http://openapi.foodsafetykorea.go.kr/api/sample/COOKRCP01/json/1/1`;
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     fetch(url)
@@ -23,6 +24,7 @@ export default function Main() {
     }).catch(error => console.log("Fetching Error"));
 
   }, []);
+
 
   const mainClick = () => {
 
