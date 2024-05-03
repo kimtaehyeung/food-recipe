@@ -4,7 +4,8 @@ import DataContext from "../context/DataContext";
 
 export default function SlideImg_main({text, onClick, type}) {
 
-  const data = useContext(DataContext);
+  const datas = useContext(DataContext);
+  const data = datas;
   const [currentIndex, setCurrentIndex] = useState();
 
   const imgSrcList = useMemo(() => data ? data.map(item => item.ATT_FILE_NO_MK) : []); // 여기를 수정함
@@ -13,7 +14,7 @@ export default function SlideImg_main({text, onClick, type}) {
     if (data.length) {
       setCurrentIndex(Math.floor(Math.random() * imgSrcList.length));
     }
-  }, [data.length, imgSrcList.length]); // 의존성 배열에 data.length와 imgSrcList.length 추가
+    }, [imgSrcList.length]); // 의존성 배열에 data.length와 imgSrcList.length 추가
 
 
   useEffect(() => {
