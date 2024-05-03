@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="70e01af0-f6c0-4002-b1e2-1676712e04b4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +38,7 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+
                     <option name="branchName" value="main" />
                     <option name="lastUsedInstant" value="1714732747" />
                   </RecentBranch>
@@ -70,6 +72,7 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
+
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -87,6 +90,7 @@
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "C:\\Users\\happy\\AppData\\Local\\Programs\\IntelliJ IDEA Ultimate 2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
+
   }
 }]]></component>
   <component name="ReactDesignerToolWindowState">
@@ -145,7 +149,13 @@
       <workItem from="1714717799346" duration="17000" />
       <workItem from="1714717838223" duration="29000" />
       <workItem from="1714717902479" duration="6614000" />
+<<<<<<< HEAD
       <workItem from="1714728158515" duration="4857000" />
+=======
+
+      <workItem from="1714728158515" duration="4423000" />
+
+>>>>>>> 41f8ae11f971f2878ed12828e28cee69081f0c0f
     </task>
     <servers />
   </component>
