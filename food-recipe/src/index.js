@@ -4,7 +4,7 @@ import Random from './components/Random';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Main from './components/Main';
-import Recipe from './components/Recipe';
+import Recipe from './components/Recipe-test';
 import LikePage from './components/LikePage';
 import Ingredient from './components/Ingredient';
 import Rank from './components/Rank';
