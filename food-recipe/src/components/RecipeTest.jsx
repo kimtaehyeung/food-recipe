@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import {useLocation} from "react-router-dom"
 import Header from "./Header"
-export default function Recipe() {
+export default function RecipeTest() {
   const [recipe, setRecipe] = useState({})
   const [isloading, setIsloading] = useState(true)
   let location = useLocation();

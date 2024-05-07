@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import axios from "axios"
 
 export default function Recipe(){
     const [recipe,setRecipe] = useState("")
@@ -18,9 +19,16 @@ export default function Recipe(){
         getRecipe()
     },[])
 
+    
     const recipeStyle = {
         width:'70rem',
+        padding:'4rem 0 4rem 0',
     }
+
+    const recipeMainStyle = {
+        width:'60rem',
+    }
+
     return (
         <div className="grid place-items-center bg-slate-100">
             {isloading ? ( 
@@ -31,8 +39,9 @@ export default function Recipe(){
                             <FoodDisplay recipe={recipe}/>
                             <FoodGradients recipe={recipe}/>
                         </header>
-                        <main className="mt-16">
+                        <main className="mt-16" style={recipeMainStyle}>
                             <Step recipe={recipe}/>
+                            <Like likedRecipe={recipe}/>
                         </main>
                         {/* <footer className="mt-16">
                             <FoodFinal recipe={recipe}/>
@@ -59,8 +68,6 @@ const FoodDisplay = (props) => {
     )
 }
 
-
-
 const FoodGradients = (props) => {
     const recipe = props.recipe[1]
     const gradients = recipe.RCP_PARTS_DTLS.split(",")
@@ -76,16 +83,14 @@ const FoodGradients = (props) => {
                     <ul className="w-1/2">
                         {gradients.slice(0, halfOfGradient).map((gradient, index) => (
                             <li key={index} className="flex justify-between p-3">
-                                <span>{index+1} {gradient}</span>
-                                <span></span>
+                                <span>{gradient}</span>
                             </li>
                         ))}
                     </ul>
                     <ul className="w-1/2">
                         {gradients.slice(halfOfGradient).map((gradient, index) => (
                             <li key={index + halfOfGradient} className="flex justify-between p-3">
-                                <span>{index + halfOfGradient+1} {gradient}</span>
-                                <span></span>
+                                <span>{gradient}</span>
                             </li>
                         ))}
                     </ul>
@@ -120,6 +125,25 @@ const Step = (props) => {
         </div>
     )
 }
+
+const Like = () => {
+    return (
+        <div className="w-full flex justify-end mt-2">
+            <button className="border rounded px-2 py-1 hover:bg-slate-100 ac" onClick={likeSave}>좋아요</button>
+        </div>
+    )
+}
+
+const likeSave = async (props) => {
+    const likedRecipe = props.recipe
+    try {
+        const response = await axios.post('https://bd3f2ab8-bb65-43b7-b977-a9942d562a74.mock.pstmn.io/users/1', likeSave);
+        console.log("Update successful");
+    } catch (error) {
+        console.error('Error sending updated recipe:', error);
+    }
+};
+
 
 const FoodFinal = (props) => {
     const imgSrc = props.recipe[1].ATT_FILE_NO_MAIN
