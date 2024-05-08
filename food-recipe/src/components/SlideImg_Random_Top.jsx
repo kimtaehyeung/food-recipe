@@ -37,16 +37,16 @@ export default function SlideImg_Random_Top({text}) {
 
   return (
     <>
-      <div className = {`relative w-full bg-white rounded-3xl mb-0 mr-1 ml-1`}>
-        <div className = "max-w-md mx-auto relative h-[400px] p-2"> {/* padding 추가하여 이미지가 상자보다 조금 작게 보이도록 함 */}
+      <div className = {`relative w-full bg-white rounded-3xl mb-0 mr-1 ml-1 hover:skew-y-3 `}>
+        <div className = "max-w-md mx-auto relative h-[400px] bg-white rounded-3xl">
           {/* 이미지 슬라이드 */}
-          <div className = "flex overflow-hidden h-full rounded-3xl">
+          <div className = "flex overflow-hidden h-full p-0 rounded-3xl shadow-lg">
 
             {imgSrcList.map((el, index) => (
               <img
                 key = {index}
                 src = {el}
-                className = {`object-cover px-[1%] w-full h-auto ${index !== currentIndex ? 'hidden' : ''}`} // 'object-contain'과 'h-auto' 사용
+                className = {`transition-opacity duration-1000 ease-linear object-cover w-full h-full rounded-3xl border-2 border-white absolute ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
               />
             ))}
             <div className = "absolute inset-0 z-10 flex justify-center items-center">

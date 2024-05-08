@@ -27,12 +27,14 @@ const App = () => {
           setApi_key(d)
           return d
         })
-        .then((api) => setUrl(`http://openapi.foodsafetykorea.go.kr/api/${api}/COOKRCP01/json/1/100/`));
+        .then((api) => setUrl(`http://openapi.foodsafetykorea.go.kr/api/${api}/COOKRCP01/json/1/100`));
     };
   }, []);
+
   // RCP_NM="새우 두부 계란찜"
   console.log(api_key);
   console.log(url);
+  console.log(data.length);
   // const url = `http://openapi.foodsafetykorea.go.kr/api/sample/COOKRCP01/json/1/1`;
 
   // const [data, setData] = useState([]);

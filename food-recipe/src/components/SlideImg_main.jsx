@@ -42,21 +42,20 @@ export default function SlideImg_main({type, text, onClick}) {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + imgSrcList.length) % imgSrcList.length);
   };
   const mainClick = () => {
-    navigate("/recipe", { state: { recipeData: data[currentIndex] } });
+    navigate("/recipe", {state: {recipeData: data[currentIndex]}});
   };
   return (
     <div
-      className={`relative w-full mb-5 mb-0 ${
-        type === 'main' ? 'mt-16 bg-gradient-to-r from-orange-400 via-red-500 to-pink-500\n shadow-lg' : 'mt-0'
+      className = {`relative w-full mb-5 mb-0 ${
+        type === 'main' ? 'mt-14 shadow-xl pb-3 rounded-3xl ' : 'mt-0 hover:skew-y-3'
       }`}
-      onClick={type === "main" ? mainClick : onClick}
-    >
+      onClick = {type === "main" ? mainClick : onClick}>
       {/* 화살표 버튼만을 위한 컨테이너 */}
       {type === "main" ?
         <div className = "absolute inset-0 z-10 flex justify-between items-center w-full">
           {/* 이전 버튼 */}
           <button
-            className = "z-20 absolute left-4 top-1/2 -translate-y-1/2 text-[500%] text-white"
+            className = "z-20 absolute left-4 top-1/2 -translate-y-1/2 text-[500%] text-blue-200"
             onClick = {(e) => {
               e.stopPropagation(); // 이벤트 전파 중지
               prevButton();
@@ -66,43 +65,48 @@ export default function SlideImg_main({type, text, onClick}) {
           </button>
 
           {/* 텍스트가 있을 경우 표시 */}
-          {text ? <div className = "text-black bg-violet-50 bg-opacity-50 rounded-3xl text-3xl">{text}</div> : ''}
-
-          {/* 다음 버튼 */}
-          <button
-            className = "text-4xl z-20 absolute right-4 top-1/2 -translate-y-1/2 text-[500%] text-red-800"
-            onClick = {(e) => {
-              e.stopPropagation(); // 이벤트 전파 중지
-              nextButton();
-            }}
-          >
-            &gt;
-          </button>
-        </div>
-        : (text ?
-          <div className = "absolute inset-0 z-10 flex justify-center items-center w-full h-full">
-            <div className = "text-black bg-violet-50 bg-opacity-50 rounded-b text-3xl">
+          {text ? (
+            <div className = "px-8 py-4 text-black bg-violet-500 bg-opacity-80 rounded-3xl text-3xl font-semibold shadow-lg hover:bg-violet-600 transition duration-300">
               {text}
             </div>
-          </div>
-          : '')
-      }
-      {/* 기존 이미지 슬라이더 컨테이너 (사이즈 유지) */
-      }
-      <div className = "max-w-md mx-auto relative h-[400px]">
+          ) : ''}
+
+              {/* 다음 버튼 */}
+              <button
+                className = "text-4xl z-20 absolute right-4 top-1/2 -translate-y-1/2 text-[500%] text-blue-200"
+                onClick = {(e) => {
+                  e.stopPropagation(); // 이벤트 전파 중지
+                  nextButton();
+                }}
+              >
+                &gt;
+              </button>
+            </div>
+            : (text ?
+              <div className = "absolute inset-0 z-10 flex justify-center items-center w-full h-full">
+                <div className = "text-black bg-violet-50 bg-opacity-50 rounded-b text-3xl">
+                  {text}
+                </div>
+              </div>
+              : '')
+          }
+          {/* 기존 이미지 슬라이더 컨테이너 (사이즈 유지) */
+          }
+      <div
+        className = "max-w-md mx-auto relative h-[400px] bg-white rounded-3xl transition-transform duration-300 ">
         {/* 이미지 슬라이드 */}
-        <div className = "flex overflow-hidden h-full p-0 rounded-3xl shadow-lg">
+        <div className = "flex overflow-hidden h-full p-0 rounded-3xl shadow-lg ">
           {imgSrcList.map((el, index) => (
             <img
               key = {index}
               src = {el}
-              className = {`object-cover  w-full h-full rounded-3xl border-2 border-white ${index !== currentIndex ? 'hidden' : ''}`} // 이미지에 둥근 모서리, 테두리, 그림자 추가
-              alt = "슬라이드 이미지" // 접근성 향상을 위한 alt 속성 추가
+              className = {`transition-opacity duration-1000 ease-linear object-cover w-full h-full rounded-3xl border-2 border-white absolute ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+              alt = "슬라이드 이미지"
             />
+
           ))}
         </div>
       </div>
-
     </div>
   )
     ;
