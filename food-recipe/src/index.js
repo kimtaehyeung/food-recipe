@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 // src/index.js
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+=======
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
+>>>>>>> 2ef407a3e53d3768461d0aff12b41ff70a31945b
 import './index.css';
 import Random from './components/Random';
 import Main from './components/Main';
 import Rank from './components/Rank';
+<<<<<<< HEAD
 import Recipe from './components/RecipeTest';
 import RecipeTest from './components/RecipeTest';
 import LikePage from './components/LikePage';
@@ -14,12 +21,23 @@ import EditRecipe from './components/EditPage';
 import Ingredient from './components/IngredientChoose';
 import DataContext from './context/DataContext';
 import IngredientContext from './context/IngredientContext';
+=======
+import Recipe from './components/Recipe';
+import LikePage from './components/LikePage';
+import UserRecipe from './components/UserRecipe';
+import EditRecipe from './components/EditPage';
+import IngredientChoose from './components/IngredientChoose';
+import DataContext from './context/DataContext'; // DataContext import하기
+>>>>>>> 2ef407a3e53d3768461d0aff12b41ff70a31945b
 
 // App 컴포넌트 안에서 useState와 useEffect를 사용
 const App = () => {
   const [data, setData] = useState([]); // 상태 관리를 위한 Hooks
+<<<<<<< HEAD
   const [ingredient, setIngredient] = useState([]);
 
+=======
+>>>>>>> 2ef407a3e53d3768461d0aff12b41ff70a31945b
   const [api_key, setApi_key] = useState("");
   const [url, setUrl] = useState("");
   useEffect(() => {
@@ -68,6 +86,7 @@ const App = () => {
   console.log(ingredient);
 
   return (
+<<<<<<< HEAD
     <IngredientContext.Provider value = {ingredient}>
       <DataContext.Provider value = {data}>
         <Router>
@@ -85,6 +104,22 @@ const App = () => {
         </Router>
       </DataContext.Provider>
     </IngredientContext.Provider>
+=======
+    <DataContext.Provider value={data}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/random" element={<Random />} />
+          <Route path="/recipe" element={<Recipe />} />
+          <Route path="/user_recipe" element={<UserRecipe />} />
+          <Route path="/edit_recipe" element={<EditRecipe />} />
+          <Route path="/like_page" element={<LikePage />} />
+          <Route path="/IngredientChoose" element={<IngredientChoose />} />
+          <Route path="/rank" element={<Rank />} />
+        </Routes>
+      </Router>
+    </DataContext.Provider>
+>>>>>>> 2ef407a3e53d3768461d0aff12b41ff70a31945b
   );
 };
 
