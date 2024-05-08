@@ -2,6 +2,7 @@ import {useContext, useEffect, useMemo, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import DataContext from "../context/DataContext";
+import IngredientContext from "../context/IngredientContext";
 
 
 export default function SlideImg_main({type, text, onClick}) {
@@ -11,6 +12,7 @@ export default function SlideImg_main({type, text, onClick}) {
   const [currentIndex, setCurrentIndex] = useState();
   const imgSrcList = useMemo(() => data ? data.map(item => item.ATT_FILE_NO_MK) : []); // 여기를 수정함
   const navigate = useNavigate();
+  const ingredient = useContext(IngredientContext);
 
   useEffect(() => {
     if (data.length) {
@@ -44,6 +46,7 @@ export default function SlideImg_main({type, text, onClick}) {
   const mainClick = () => {
     navigate("/recipe", {state: {recipeData: data[currentIndex]}});
   };
+  console.log(ingredient);
   return (
     <div
       className = {`relative w-full mb-5 mb-0 ${

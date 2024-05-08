@@ -24,24 +24,16 @@ export default function Random() {
       {data !== null ? (
         <div className = "rounded-3xl shadow-2xl p-3 mt-0 pt-0 m-2 grid grid-cols-1 sm:grid-cols-4 gap-4 justify-center items-center mt-14">
           <label onClick = {() => onClick("반찬")} className = "grid-item">
-            <DataContext.Provider value = {data}>
                 <SlideImg_Random_Top text = {"반찬"} />
-              </DataContext.Provider>
             </label>
             <label onClick = {() => onClick("국&찌개")} className = "grid-item">
-              <DataContext.Provider value = {data}>
                 <SlideImg_Random_Top text = {"국&찌개"} />
-              </DataContext.Provider>
             </label>
             <label onClick = {() => onClick("후식")} className = "grid-item">
-              <DataContext.Provider value = {data}>
                 <SlideImg_Random_Top text = {"후식"} />
-              </DataContext.Provider>
             </label>
             <label onClick = {() => onClick("밥")} className = "grid-item">
-              <DataContext.Provider value = {data}>
                 <SlideImg_Random_Top text = {"밥"} />
-              </DataContext.Provider>
             </label>
           </div>
       ) : (
