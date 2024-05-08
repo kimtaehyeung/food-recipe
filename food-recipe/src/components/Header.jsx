@@ -6,7 +6,7 @@ export default function Header() {
 
   return (
     <header
-      className = "fixed inset-x-0 top-0 z-50 left-0 bg-white text-gray-700 body-font ">
+      className = "bg-gradient-to-r from-blue-300 via-blue-400 to-white fixed inset-x-0 top-0 z-50 left-0 text-gray-700 body-font ">
       <div className = "container mx-auto flex flex-wrap p-3 flex-col md:flex-row items-center">
         <div
           className = "flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
