@@ -10,7 +10,7 @@ import Recipe from './components/RecipeTest';
 import LikePage from './components/LikePage';
 import UserRecipe from './components/UserRecipe';
 import EditRecipe from './components/EditPage';
-import Ingredient from './components/Ingredient';
+import Ingredient from './components/IngredientChoose';
 import RecipeTest from './components/RecipeTest';
 import DataContext from './context/DataContext'; // DataContext import하기
 
