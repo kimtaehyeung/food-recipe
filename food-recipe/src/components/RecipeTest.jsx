@@ -53,7 +53,7 @@ export default function RecipeTest() {
 }
 
 const FoodDisplay = ({recipe}) => {
-  const imgSource = recipe.ATT_FILE_NO_MAIN
+  const imgSource = recipe.ATT_FILE_NO_MK
   const name = recipe.RCP_NM
   // console.log(recipe);
   // console.log(imgSource)
@@ -70,7 +70,7 @@ const FoodDisplay = ({recipe}) => {
 
 const FoodGradients = ({recipe}) => {
   // const recipe = props.recipe[1]
-  console.log(recipe);
+  // console.log(recipe);
   const gradients = recipe.RCP_PARTS_DTLS.split(",")
   const halfOfGradient = Math.ceil(gradients.length / 2)
   const gradientStyle = {
@@ -92,8 +92,7 @@ const FoodGradients = ({recipe}) => {
           <ul className = "w-1/2">
             {gradients.slice(halfOfGradient).map((gradient, index) => (
               <li key = {index + halfOfGradient} className = "flex justify-between p-3">
-                <span>{index + halfOfGradient + 1} {gradient}</span>
-                <span></span>
+                <span>{index + halfOfGradient + 1}.{gradient}</span>
               </li>
             ))}
           </ul>
@@ -142,7 +141,7 @@ const Step = ({recipe}) => {
 
 const FoodFinal = ({recipe}) => {
   const imgSrc = recipe.ATT_FILE_NO_MAIN;
-  console.log(recipe.ATT_FILE_NO_MAIN);
+  // console.log(recipe.ATT_FILE_NO_MAIN);
   return (
     <div className = "flex justify-center">
       <div className = "grid gap-y-3">

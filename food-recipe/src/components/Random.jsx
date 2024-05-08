@@ -1,9 +1,52 @@
 import Header from "./Header";
+import DataContext from "../context/DataContext";
+import SlideImg_Random_Top from "./SlideImg_Random_Top";
+import SlideImg_Random_Bottom from "./SlideImg_Random_Bottom";
+import SlideImg_Main from "./SlideImg_main";
+import { useContext, useEffect, useState } from "react";
 
-export default function Random(){
-    return(
-        <>
-        <Header />
-        </>
-    )
+export default function Random() {
+  const data = useContext(DataContext);
+  const [text, setText] = useState(""); // 초기 상태를 data로 설정합니다.
+
+  // 선택된 데이터를 업데이트하는 함수입니다.
+  const onClick = (text) => {
+    setText(text);
+  console.log(text);
+  };
+
+
+  return (
+    <>
+      <Header />
+      {data !== null ? (
+        <div className = "grid grid-cols-1 sm:grid-cols-4 gap-4 justify-center items-center mt-14">
+          <label onClick = {() => onClick("반찬")} className = "grid-item">
+            <DataContext.Provider value = {data}>
+                <SlideImg_Random_Top text = {"반찬"} />
+              </DataContext.Provider>
+            </label>
+            <label onClick = {() => onClick("국&찌개")} className = "grid-item">
+              <DataContext.Provider value = {data}>
+                <SlideImg_Random_Top text = {"국&찌개"} />
+              </DataContext.Provider>
+            </label>
+            <label onClick = {() => onClick("후식")} className = "grid-item">
+              <DataContext.Provider value = {data}>
+                <SlideImg_Random_Top text = {"후식"} />
+              </DataContext.Provider>
+            </label>
+            <label onClick = {() => onClick("밥")} className = "grid-item">
+              <DataContext.Provider value = {data}>
+                <SlideImg_Random_Top text = {"밥"} />
+              </DataContext.Provider>
+            </label>
+          </div>
+      ) : (
+        <div>로딩중...</div>
+      )}
+      <SlideImg_Random_Bottom text = {text}></SlideImg_Random_Bottom>
+
+    </>
+  );
 }
