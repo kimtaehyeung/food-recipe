@@ -17,7 +17,7 @@ export default function SlideImg_Random_Bottom({text}) {
       ? data.filter((item) => item.RCP_PAT2.includes(text))
       : data;
     setFitData(newFitData);
-    console.log(fitData);
+    // console.log(fitData);
     setCurrentIndex(Math.floor(Math.random() * imgSrcList.length));
 
     // setCurrentIndex(1); // fitData가 변경될 때마다 currentIndex를 0으로 리셋합니다.
@@ -26,7 +26,7 @@ export default function SlideImg_Random_Bottom({text}) {
 
   // fitData를 원소가 있는 배열로 초기화합니다.
 
-  console.log(imgSrcList.length);
+  // console.log(imgSrcList.length);
 
   useEffect(() => {
     if (!imgSrcList.length) return; // imgSrcList가 비어있으면 인터벌 설정을 건너뜀

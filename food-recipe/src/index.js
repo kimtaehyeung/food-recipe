@@ -35,7 +35,7 @@ const App = () => {
         .then((api) => setUrl(`http://openapi.foodsafetykorea.go.kr/api/${api}/COOKRCP01/json/1/100`));
     };
   }, []);
-
+  
   useEffect(() => {
     fetch(url)
       .then(response => {

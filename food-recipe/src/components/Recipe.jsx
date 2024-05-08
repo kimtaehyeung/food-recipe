@@ -46,7 +46,7 @@ export default function Recipe(){
                         </header>
                         <main className="mt-16" style={recipeMainStyle}>
                             <Step recipe={recipe}/>
-                            <Like likedRecipe={recipe}/>
+                            <Like recipe={recipe}/>
                         </main>
                     </div>
                 )
@@ -112,7 +112,7 @@ const Step = (props) => {
         } else {
             break; 
         }
-    }   
+    }
     const stepStyle = {
         width:'60rem',
     }
@@ -131,15 +131,16 @@ const Step = (props) => {
     )
 }
 
-const Like = () => {
+const Like = (props) => {
+    const recipe= props.recipe
     return (
         <div className="w-full flex justify-end mt-2">
-            <button className="border rounded px-2 py-1 hover:bg-slate-100 ac" onClick={likeSave}>좋아요</button>
+            <button className="border rounded px-2 py-1 hover:bg-slate-100 ac" onClick={()=>likeSave(recipe)}>좋아요</button>
         </div>
     )
 }
 
-const likeSave = async () => {
+const likeSave = async (data) => {
     const dbName = 'myDatabase';
     const currentVersion = 2;
 
@@ -151,9 +152,23 @@ const likeSave = async () => {
         },
     });
 
+    let steps = [];
+    for (let i = 1; i <= 20; i++) { 
+        const manualKey = `MANUAL${i.toString().padStart(2, '0')}`; 
+        if (data.hasOwnProperty(manualKey) && data[manualKey]) { 
+            steps.push(data[manualKey]); 
+        } else {
+            break; 
+        }
+    }
+
     const jsonData = [
-        { id: 1, name: 'John Do', email: 'john@example.com' },
-        { id: 2, name: 'Jane Doe', email: 'jane@example.com' }
+        {
+            id: data.RCP_SEQ, 
+            recipeImg: data.ATT_FILE_NO_MAIN,
+            recipeGredients: data.RCP_PARTS_DTLS.split(","),
+            recipeSteps: steps
+        },
     ];
     
     const tx = db.transaction('liked', 'readwrite');
@@ -166,16 +181,3 @@ const likeSave = async () => {
     const allLiked = await db.getAll('liked');
     console.log(allLiked);
 };
-
-
-const FoodFinal = (props) => {
-    const imgSrc = props.recipe[1].ATT_FILE_NO_MAIN
-    return (
-        <div className="flex justify-center">
-            <div className="grid gap-y-3">
-                <img src={imgSrc} alt="음식 최종완성 이미지"/>
-                <p className="text-center">최종완성모습</p>
-            </div>
-        </div>
-    )
-}
