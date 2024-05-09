@@ -1,22 +1,47 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { openDB } from 'idb';
+import { Link, useParams } from "react-router-dom"
 
 export default function UserRecipe(){
-    const [recipe,setRecipe] = useState("")
+    const [recipeDB,setRecipeDB] = useState({})
     const [isloading,setIsloading] = useState(true)
-    const getRecipe = async() => {
+    const { recipeId } = useParams();
+
+    const fetchLiked = async (id) => {
         try {
-            const response = await (await fetch('http://openapi.foodsafetykorea.go.kr/api/sample/COOKRCP01/json/1/5')).json()
-            setRecipe(response.COOKRCP01.row)
-        } catch (error) {
+            const db = await initDB();
+            const tx = db.transaction('liked', 'readonly');
+            const store = tx.objectStore('liked');
+            const likedRecipe = await store.get(id);
+            await tx.done;
+            setRecipeDB(likedRecipe)
+            console.log(likedRecipe)
+        }
+        catch(error) {
             console.log(error)
-        } finally {
+        }
+        finally {
             setIsloading(false)
         }
     }
+
+    async function initDB() {
+        const dbName = 'myDatabase';  
+        const version = 2;            
     
+        const db = await openDB(dbName, version, {
+            upgrade(db, oldVersion, newVersion, transaction) {
+                if (!db.objectStoreNames.contains('liked')) {
+                    db.createObjectStore('liked', { keyPath: 'id' });
+                }
+            },
+        });
+    
+        return db;  
+    }
+
     useEffect(()=>{ 
-        getRecipe()
+        fetchLiked(recipeId)
     },[])
 
     const recipeStyle = {
@@ -35,16 +60,13 @@ export default function UserRecipe(){
             ) : (
                     <div className="grid place-items-center bg-white shadow" style={recipeStyle}>
                         <header>
-                            <FoodDisplay recipe={recipe}/>
-                            <FoodGradients recipe={recipe}/>
+                            <FoodDisplay recipe={recipeDB}/>
+                            <FoodGradients recipe={recipeDB}/>
                         </header>
                         <main className="mt-16" style={recipeMainStyle}>
-                            <Step recipe={recipe}/>
-                            <EditBtn/>
+                            <Step recipe={recipeDB}/>
+                            <EditBtn recipeId={recipeDB.id}/>
                         </main>
-                        {/* <footer className="mt-16">
-                            <FoodFinal recipe={recipe}/>
-                        </footer> */}
                     </div>
                 )
             }
@@ -52,19 +74,19 @@ export default function UserRecipe(){
     )
 }
 
-const EditBtn = () => {
+const EditBtn = (props) => {
+    const recipeId=props.recipeId
     return (
         <div className="w-full flex justify-end mt-2">
-            <Link to='../edit_recipe' className="border rounded px-2 py-1 hover:bg-slate-100">수정하기</Link>
+            <Link to='../edit_recipe' state={{ recipeId: recipeId }} className="border rounded px-2 py-1 hover:bg-slate-100">수정하기</Link>
         </div>
     )
 }
 
 const FoodDisplay = (props) => {
-    const recipe = props.recipe[1]
+    const recipe = props.recipe
     const imgSource = recipe.ATT_FILE_NO_MAIN
     const name = recipe.RCP_NM
-    console.log(imgSource)
     return  (
         <div className="flex justify-center mb-16">
             <div className="grid gap-y-3">
@@ -75,11 +97,9 @@ const FoodDisplay = (props) => {
     )
 }
 
-
-
 const FoodGradients = (props) => {
-    const recipe = props.recipe[1]
-    const gradients = recipe.RCP_PARTS_DTLS.split(",")
+    const recipe = props.recipe
+    const gradients = recipe.RCP_PARTS_DTLS
     const halfOfGradient = Math.ceil(gradients.length/2)
     const gradientStyle = {
         width: '60rem',
@@ -92,16 +112,14 @@ const FoodGradients = (props) => {
                     <ul className="w-1/2">
                         {gradients.slice(0, halfOfGradient).map((gradient, index) => (
                             <li key={index} className="flex justify-between px-1 py-2">
-                                <span>{index+1} {gradient}</span>
-                                <span></span>
+                                <span>{gradient}</span>
                             </li>
                         ))}
                     </ul>
                     <ul className="w-1/2">
                         {gradients.slice(halfOfGradient).map((gradient, index) => (
                             <li key={index + halfOfGradient} className="flex justify-between px-1 py-2">
-                                <span>{index + halfOfGradient+1} {gradient}</span>
-                                <span></span>
+                                <span>{gradient}</span>
                             </li>
                         ))}
                     </ul>
@@ -113,12 +131,8 @@ const FoodGradients = (props) => {
 
 
 const Step = (props) => {
-    const recipe = props.recipe[1]
-    const steps = [
-        recipe.MANUAL01,
-        recipe.MANUAL02,
-        recipe.MANUAL03
-    ]
+    const recipe = props.recipe
+    const steps = recipe.steps
     const stepStyle = {
         width:'60rem',
     }
@@ -128,23 +142,10 @@ const Step = (props) => {
             <ul className="grid gap-y-3">
                 {steps.map((step,index)=>(
                     <li key={index} className="border border-solid rounded p-3">
-                        {/* <span className="border border-solid rounded me-1 px-1">{index+1}</span> */}
                         <span>{step}</span>
                     </li>
                 ))}
             </ul>
-        </div>
-    )
-}
-
-const FoodFinal = (props) => {
-    const imgSrc = props.recipe[1].ATT_FILE_NO_MAIN
-    return (
-        <div className="flex justify-center">
-            <div className="grid gap-y-3">
-                <img src={imgSrc} alt="음식 최종완성 이미지"/>
-                <p className="text-center">최종완성모습</p>
-            </div>
         </div>
     )
 }
