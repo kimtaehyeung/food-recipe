@@ -164,10 +164,11 @@ const likeSave = async (data) => {
 
     const jsonData = [
         {
-            id: data.RCP_SEQ, 
-            recipeImg: data.ATT_FILE_NO_MAIN,
-            recipeGredients: data.RCP_PARTS_DTLS.split(","),
-            recipeSteps: steps
+            id: data.RCP_SEQ,
+            RCP_NM:data.RCP_NM,
+            ATT_FILE_NO_MAIN: data.ATT_FILE_NO_MAIN,
+            RCP_PARTS_DTLS: data.RCP_PARTS_DTLS.split(","),
+            steps: steps
         },
     ];
     
