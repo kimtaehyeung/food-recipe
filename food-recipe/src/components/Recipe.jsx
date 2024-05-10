@@ -24,11 +24,6 @@ export default function Recipe(){
         getRecipe()
     },[recipeData])
 
-    const recipeStyle = {
-        width:'70rem',
-        padding:'4rem 0 4rem 0',
-    }
-
     const recipeMainStyle = {
         width:'60rem',
     }
@@ -39,7 +34,7 @@ export default function Recipe(){
             {isloading ? ( 
                 <> isloading... </>
             ) : (
-                    <div className="grid place-items-center bg-white shadow" style={recipeStyle}>
+                    <div className="grid place-items-center bg-white shadow w-[70rem] py-[4rem]">
                         <header>
                             <FoodDisplay recipe={recipe}/>
                             <FoodGradients recipe={recipe}/>
@@ -62,8 +57,8 @@ const FoodDisplay = (props) => {
     return  (
         <div className="flex justify-center mb-16">
             <div className="grid gap-y-3">
-                <img src={imgSource} alt="음식 이미지"/>
-                <p className="text-center">{name}</p>
+                <img src={imgSource} alt="음식 이미지" className="w-[640px]"/>
+                <p className="text-center font-semibold text-2xl">{name}</p>
             </div>
         </div>
     )
@@ -78,20 +73,20 @@ const FoodGradients = (props) => {
     }
     return (
         <div className="border border-solid rounded p-3" style={gradientStyle}>   
-            <p>재료</p>
+            <p className="font-semibold text-2xl sm:text-lg">재료</p>
             <div className="flex justify-center w-full">
-                <div className="flex justify-between w-full">
-                    <ul className="w-1/2">
+                <div className="flex flex-col sm:flex-row justify-between w-full">
+                    <ul className="w-full sm:w-1/2">
                         {gradients.slice(0, halfOfGradient).map((gradient, index) => (
                             <li key={index} className="flex justify-between p-3">
-                                <span>{gradient}</span>
+                                <span className="text-2xl sm:text-lg">{gradient}</span>
                             </li>
                         ))}
                     </ul>
-                    <ul className="w-1/2">
+                    <ul className="w-full sm:w-1/2">
                         {gradients.slice(halfOfGradient).map((gradient, index) => (
                             <li key={index + halfOfGradient} className="flex justify-between p-3">
-                                <span>{gradient}</span>
+                                <span className="text-2xl sm:text-lg">{gradient}</span>
                             </li>
                         ))}
                     </ul>
@@ -119,11 +114,11 @@ const Step = (props) => {
 
     return (
         <div style={stepStyle}>
-            <p className="mb-3">조리순서</p>
+            <p className="font-semibold mb-3 text-2xl sm:text-lg">조리순서</p>
             <ul className="grid gap-y-3">
                 {steps.map((step,index)=>(
                     <li key={index} className="border border-solid rounded p-3">
-                        <span>{step}</span>
+                        <span className="text-2xl sm:text-lg">{step}</span>
                     </li>
                 ))}
             </ul>
@@ -135,7 +130,7 @@ const Like = (props) => {
     const recipe= props.recipe
     return (
         <div className="w-full flex justify-end mt-2">
-            <button className="border rounded px-2 py-1 hover:bg-slate-100 ac" onClick={()=>likeSave(recipe)}>좋아요</button>
+            <button className="border rounded px-2 py-1 hover:bg-slate-100 text-2xl sm:text-lg" onClick={()=>likeSave(recipe)}>좋아요</button>
         </div>
     )
 }

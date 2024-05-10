@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState,useRef } from "react"
 import { useNavigate,useLocation } from "react-router-dom"
 import { openDB } from 'idb';
+import Header from "./Header";
 
 export default function EditRecipe(){
     const [recipeDB,setRecipeDB] = useState([])
@@ -10,6 +11,7 @@ export default function EditRecipe(){
     const location = useLocation();
     const recipeId = location.state?.recipeId;
     
+    
     const fetchLiked = async () => {
         try {
             const db = await initDB();
@@ -17,10 +19,10 @@ export default function EditRecipe(){
             const store = tx.objectStore('liked');
             const allLikes = await store.getAll();
             const selectedRecipe = await store.get(recipeId);
-            await tx.done;
             setRecipeDB(selectedRecipe);
             setIngredients(selectedRecipe.RCP_PARTS_DTLS || []); 
             setSteps(selectedRecipe.steps || []);
+            await tx.done;
             return allLikes;
         }
         catch(error) {
@@ -30,7 +32,7 @@ export default function EditRecipe(){
             setIsloading(false)
         }
     }
-
+    
     async function initDB() {
         const dbName = 'myDatabase';  
         const version = 2;            
@@ -57,13 +59,14 @@ export default function EditRecipe(){
     const recipeMainStyle = {
         width:'60rem',
     }
-    console.log(recipeDB)
+
     return (
         <div className="grid place-items-center bg-slate-100">
             {isloading ? ( 
                 <> isloading... </>
             ) : (
                     <div className="grid place-items-center bg-white shadow" style={recipeStyle}>
+                        <Header/>
                         <header>
                             <FoodDisplay recipe={recipeDB}/>
                             <FoodGradients recipe={recipeDB} ingredients={ingredients} setIngredients={setIngredients}/>
@@ -82,6 +85,7 @@ export default function EditRecipe(){
 const UpdateBtn = (props) => {
     const navigate = useNavigate();
     const recipeId = props.recipe.id
+    const recipeName = props.recipe.RCP_NM
     const recipeImg = props.recipe.ATT_FILE_NO_MAIN
     const ingredients = props.ingredients
     const steps = props.steps
@@ -89,6 +93,7 @@ const UpdateBtn = (props) => {
     const handleUpdate = async () => {
         const newData = {
             id: recipeId,
+            RCP_NM:recipeName,
             ATT_FILE_NO_MAIN: recipeImg,
             RCP_PARTS_DTLS: ingredients,
             steps: steps
@@ -96,10 +101,12 @@ const UpdateBtn = (props) => {
         await EditedlikeSave(newData)
         navigate(`/user_recipe/${recipeId}`);
     }
-
+    const updateBtnStyle = {
+        margin:'3rem 0 0 0'
+    }
     return (
-        <div className="w-full flex justify-end mt-2">
-            <button onClick={handleUpdate} className="border rounded px-2 py-1 hover:bg-slate-100 me-1">수정완료</button>
+        <div className="w-full flex justify-end" style={updateBtnStyle}>
+            <button onClick={handleUpdate} className="border rounded px-2 py-1 hover:bg-slate-100 text-2xl sm:text-lg">수정완료</button>
         </div>
     )
 }
@@ -107,7 +114,8 @@ const UpdateBtn = (props) => {
 const EditedlikeSave = async (data) => {
     const db = await openDB('myDatabase', 2);
     const jsonData = {
-        id: data.id,  
+        id: data.id,
+        RCP_NM:data.RCP_NM,
         ATT_FILE_NO_MAIN: data.ATT_FILE_NO_MAIN,
         RCP_PARTS_DTLS: data.RCP_PARTS_DTLS,
         steps: data.steps
@@ -128,16 +136,30 @@ const FoodDisplay = (props) => {
     return  (
         <div className="flex justify-center mb-16">
             <div className="grid gap-y-3">
-                <img src={imgSource} alt="음식 이미지"/>
-                <p className="text-center">{name}</p>
+                <img src={imgSource} alt="음식 이미지" className="w-[640px]"/>
+                <p className="text-center font-semibold text-2xl">{name}</p>
             </div>
         </div>
     )
 }
 
+const autoResize = (textarea) => {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+};
+
 const FoodGradients = (props) => {
     const ingredients = props.ingredients
     const halfOfGradient = Math.ceil(ingredients.length/2)
+    const textAreaRefs = useRef([]);
+    useEffect(() => {
+        textAreaRefs.current.forEach(textArea => {
+            if (textArea) {
+                autoResize(textArea);
+            }
+        });
+    }, [props.steps]);
+
     const ingredientStyle = {
         width: '60rem',
     }
@@ -146,6 +168,7 @@ const FoodGradients = (props) => {
         const newIngredients = [...ingredients];
         newIngredients[index] = event.target.value;
         props.setIngredients(newIngredients);
+        autoResize(event.target)
     };
 
     const addIngredient = () => {
@@ -155,36 +178,42 @@ const FoodGradients = (props) => {
 
     const removeIngredient = (index) => {
         props.setIngredients(prev => prev.filter((_, i) => i !== index));
+        console.log(props)
     };
 
     return (
         <div className="border border-solid rounded p-3" style={ingredientStyle}>   
-            <p> 재료
-                <button onClick={addIngredient} className="px-2 py-1 border rounded hover:bg-slate-100">재료 추가</button>
-            </p>
+            <div className="w-full flex px-2 mb-3">
+                <p className="font-semibold text-2xl sm:text-lg">재료</p>
+                <button onClick={addIngredient} className="border rounded hover:bg-slate-100 px-1 ms-3 text-2xl sm:text-lg">추가하기</button>
+            </div>
             <div className="flex justify-center w-full">
-                <div className="flex justify-between w-full">
-                    <ul className="w-1/2">
+                <div className="flex-col sm:flex-row justify-between w-full">
+                    <ul className="w-1/2 sm:w-full">
                         {ingredients.slice(0, halfOfGradient).map((gradient, index) => (
-                            <li key={index} className="flex justify-between px-1 py-2">
-                                <input 
-                                    className="w-full rounded px-1 py-2 hover:bg-slate-100" 
+                            <li key={`${gradient}-${index}`} className="flex justify-between px-1 py-2">
+                                <textarea 
+                                    ref={el => textAreaRefs.current[index] = el}
+                                    className="w-5/6 rounded px-1 py-2 hover:bg-slate-100 text-2xl sm:text-lg resize-none overflow-hidden"
+                                    rows="1"
                                     defaultValue={gradient} 
                                     onChange={(event) => handleIngredientChange(index, event)}
                                 />
-                                <button onClick={() => removeIngredient(index)}>삭제</button>
+                                <button className="w-fit h-fit justify-self-center self-center border rounded hover:bg-slate-100 px-2 py-1 text-2xl sm:text-lg" onClick={() => removeIngredient(index)}>삭제</button>
                             </li>
                         ))}
                     </ul>
-                    <ul className="w-1/2">
+                    <ul className="w-1/2 sm:w-full">
                         {ingredients.slice(halfOfGradient).map((gradient, index) => (
-                            <li key={index + halfOfGradient} className="flex justify-between px-1 py-2">
-                                <input 
-                                    className="w-full rounded px-1 py-2 hover:bg-slate-100" 
+                            <li key={`${gradient+halfOfGradient}-${index}`} className="flex justify-between px-1 py-2">
+                                <textarea
+                                    ref={el => textAreaRefs.current[index+halfOfGradient] = el}
+                                    className="w-5/6 rounded px-1 py-2 hover:bg-slate-100 text-2xl sm:text-lg resize-none overflow-hidden"
+                                    rows="1"
                                     defaultValue={gradient}
                                     onChange={(event) => handleIngredientChange(index + halfOfGradient, event)}
                                 />
-                                <button onClick={() => removeIngredient(index + halfOfGradient)}>삭제</button>
+                                <button className="w-fit h-fit justify-self-center self-center border rounded hover:bg-slate-100 px-2 py-1 text-2xl sm:text-lg" onClick={() => removeIngredient(index + halfOfGradient)}>삭제</button>
                             </li>
                         ))}
                     </ul>
@@ -197,6 +226,16 @@ const FoodGradients = (props) => {
 
 const Step = (props) => {
     const steps = props.steps
+    const textAreaRefs = useRef([]);
+    console.log(steps)
+    useEffect(() => {
+        textAreaRefs.current.forEach(textArea => {
+            if (textArea) {
+                autoResize(textArea);
+            }
+        });
+    }, [props.steps]); 
+
     const stepStyle = {
         width:'60rem',
     }
@@ -205,6 +244,7 @@ const Step = (props) => {
         const newSteps = [...steps];
         newSteps[index] = event.target.value;
         props.setSteps(newSteps);
+        autoResize(event.target)
     };
 
     const addStep = () => {
@@ -218,22 +258,24 @@ const Step = (props) => {
 
     return (
         <div style={stepStyle}>
-            <p className="mb-3">
-                조리순서
-                <button onClick={addStep} className="px-2 py-1 border rounded hover:bg-slate-100">순서 추가</button>
-            </p>
+            <div className="w-full flex mb-5">
+                <p className="font-semibold text-2xl sm:text-lg">조리순서</p>
+                <button onClick={addStep} className="px-1 border rounded hover:bg-slate-100 ms-3 text-2xl sm:text-lg">추가하기</button>
+            </div>
             <ul className="grid gap-y-3">
                 {steps.map((step,index)=>(
-                    <li key={index} className="">
-                        <input 
-                            className="w-full border rounded p-3 hover:bg-slate-100"
+                    <li key={`${step}-${index}`} className="grid grid-cols-12">
+                        <textarea
+                            ref={el => textAreaRefs.current[index] = el}
+                            className="col-span-11 border rounded p-3 hover:bg-slate-100 text-2xl sm:text-lg resize-none overflow-hidden"
                             defaultValue={step}
+                            rows="1"
                             onChange={(event)=>handleStepChange(index,event)}
                         />
-                        <button onClick={() => removeStep(index)}>삭제</button>
+                        <button className="w-fit h-fit justify-self-center self-center border rounded hover:bg-slate-100 px-2 py-1 text-2xl sm:text-lg" onClick={() => removeStep(index)}>삭제</button>
                     </li>
                 ))}
             </ul>
         </div>
-    )
+    )   
 }
