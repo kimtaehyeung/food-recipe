@@ -31,9 +31,6 @@ export default function SlideImg_Random_Top({text}) {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + imgSrcList.length) % imgSrcList.length);
   };
 
-  const mainClick = () => {
-    navigate("/recipe", {state: {recipeData: data[currentIndex]}});
-  };
 
   return (
     <>

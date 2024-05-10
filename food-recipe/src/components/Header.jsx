@@ -12,8 +12,7 @@ export default function Header() {
           className = "flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
           onClick={() =>{
             navigate("/");
-          }}
-        >
+          }}>
           <img src = {"/logo512.png"} className = "w-8 h-8 -mr-1" />
           <span className = "ml-3 text-xl text-indigo-500">로고</span>
         </div>

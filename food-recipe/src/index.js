@@ -1,4 +1,3 @@
-
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
@@ -20,20 +19,15 @@ import IngredientContext from './context/IngredientContext';
 const App = () => {
   const [data, setData] = useState([]); // 상태 관리를 위한 Hooks
   const [ingredient, setIngredient] = useState([]);
-
-  const [api_key, setApi_key] = useState("");
   const [url, setUrl] = useState("");
+
   useEffect(() => {
     return () => {
       fetch("/api-key.txt").then(response => response.text())
-        .then(d => {
-          setApi_key(d)
-          return d
-        })
         .then((api) => setUrl(`http://openapi.foodsafetykorea.go.kr/api/${api}/COOKRCP01/json/1/100`));
     };
   }, []);
-  
+
   useEffect(() => {
     fetch(url)
       .then(response => {
@@ -46,27 +40,27 @@ const App = () => {
 
   }, [url]);
 
-  const pattern = /\b([가-힣]+)\s+\d+g/g;
-
   useEffect(() => {
     if (data && data.length > 0) {
       const ingredientsList = data.map(item => {
-        // 정규표현식을 사용해 올바른 형식의 재료명만 추출
         const matches = item.RCP_PARTS_DTLS.match(/([가-힣]+)\s+\d+g[^,)]*/g) || [];
         return matches.map(match => {
-          // 각 매치에서 재료명만 추출
           const matchParts = match.match(/([가-힣]+)/);
           return matchParts && matchParts[1]; // 재료명 반환
         });
       }).flat(); // 모든 요리의 재료명을 하나의 배열로 합침
 
-      // Set을 사용해 중복 제거
+      // Set을 사용해 중복 제거 후 배열로 변환
       const uniqueIngredients = [...new Set(ingredientsList)];
+
+      // 사전순으로 정렬
+      uniqueIngredients.sort((a, b) => a.localeCompare(b));
+
+      // 정렬된 배열로 상태 업데이트
       setIngredient(uniqueIngredients);
     }
   }, [data]); // 'data'가 변경될 때마다 이 useEffect가 실행됨; // 'data'가 변경될 때마다 이 useEffect가 실행됨
 
-  console.log(ingredient);
 
   return (
     <IngredientContext.Provider value = {ingredient}>
@@ -77,7 +71,7 @@ const App = () => {
             <Route path = "/random" element = {<Random />} />
             <Route path = "/recipe" element = {<Recipe />} />
             <Route path = "/user_recipe" element = {<UserRecipe />} />
-            <Route path = "/user_recipe/:recipeId" element = {<UserRecipe />} />  
+            <Route path = "/user_recipe/:recipeId" element = {<UserRecipe />} />
             <Route path = "/edit_recipe" element = {<EditRecipe />} />
             <Route path = "/like_page" element = {<LikePage />} />
             <Route path = "/ingredient" element = {<Ingredient />} />
