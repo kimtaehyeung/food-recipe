@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { openDB } from 'idb';
 import { Link } from "react-router-dom"
+import Header from "./Header";
 
 export default function LikePage(){
     return (
         <>
+            <Header/>
             <LikedFood/>
         </>
     )
@@ -23,6 +25,7 @@ const LikedFood = () => {
             const allLikes = await store.getAll();
             await tx.done;
             setLiked(allLikes)
+            console.log("loading")
         }
         catch(error) {
             console.log(error)
@@ -52,7 +55,7 @@ const LikedFood = () => {
     },[])
 
     const likedListStyle = {
-        width:'60rem',
+        width:'70rem',
     }
     const likedStyle = {
         width:'50rem',
@@ -67,16 +70,16 @@ const LikedFood = () => {
     }
     
     return (
-        <div className="h-screen grid place-items-center bg-slate-100">
-            <div className="h-screen grid place-items-center bg-white shadow" style={likedListStyle}>
+        <div className="h-900px grid place-items-center bg-slate-100">
+            <div className="h-screen grid place-items-center bg-white" style={likedListStyle}>
                 <ul>
                     {liked.map((item,_)=>(
                         <div key={item.id}>
                             <li className="flex justify-between border border-solid p-3" style={likedStyle}>
-                                <span>{item.RCP_NM}</span>
+                                <span className="text-2xl sm:text-lg">{item.RCP_NM}</span>
                                 <div>
-                                    <Link to={`/user_recipe/${item.id}`} className="rounded hover:bg-slate-200 p-1 me-2">보기</Link>
-                                    <button className="rounded hover:bg-slate-200 p-1" onClick={()=> deleteLiked(item.id)}>삭제</button>
+                                    <Link to={`/user_recipe/${item.id}`} className="w-fit h-fit justify-self-center self-center border rounded hover:bg-slate-100 px-2 py-1 me-2 text-2xl sm:text-lg">보기</Link>
+                                    <button className="w-fit h-fit justify-self-center self-center border rounded hover:bg-slate-100 px-2 py-1 text-2xl sm:text-lg" onClick={()=> deleteLiked(item.id)}>삭제</button>
                                 </div>
                             </li>
                         </div>
