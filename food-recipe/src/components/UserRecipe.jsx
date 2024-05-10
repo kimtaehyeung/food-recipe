@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { openDB } from 'idb';
 import { Link, useParams } from "react-router-dom"
+import Header from "./Header";
 
 export default function UserRecipe(){
     const [recipeDB,setRecipeDB] = useState({})
@@ -59,6 +60,7 @@ export default function UserRecipe(){
                 <> isloading... </>
             ) : (
                     <div className="grid place-items-center bg-white shadow" style={recipeStyle}>
+                        <Header/>
                         <header>
                             <FoodDisplay recipe={recipeDB}/>
                             <FoodGradients recipe={recipeDB}/>
@@ -78,7 +80,7 @@ const EditBtn = (props) => {
     const recipeId=props.recipeId
     return (
         <div className="w-full flex justify-end mt-2">
-            <Link to='../edit_recipe' state={{ recipeId: recipeId }} className="border rounded px-2 py-1 hover:bg-slate-100">수정하기</Link>
+            <Link to='../edit_recipe' state={{ recipeId: recipeId }} className="border rounded px-2 py-1 hover:bg-slate-100 text-2xl sm:text-lg">수정하기</Link>
         </div>
     )
 }
@@ -90,8 +92,8 @@ const FoodDisplay = (props) => {
     return  (
         <div className="flex justify-center mb-16">
             <div className="grid gap-y-3">
-                <img src={imgSource} alt="음식 이미지"/>
-                <p className="text-center">{name}</p>
+                <img src={imgSource} alt="음식 이미지" className="w-[640px]"/>
+                <p className="text-center font-semibold text-2xl">{name}</p>
             </div>
         </div>
     )
@@ -106,20 +108,20 @@ const FoodGradients = (props) => {
     }
     return (
         <div className="border border-solid rounded p-3" style={gradientStyle}>   
-            <p>재료</p>
+            <p className="font-semibold text-2xl sm:text-lg">재료</p>
             <div className="flex justify-center w-full">
-                <div className="flex justify-between w-full">
-                    <ul className="w-1/2">
+                <div className="flex flex-col sm:flex-row justify-between w-full">
+                    <ul className="w-1/2 sm:w-1/2">
                         {gradients.slice(0, halfOfGradient).map((gradient, index) => (
                             <li key={index} className="flex justify-between px-1 py-2">
-                                <span>{gradient}</span>
+                                <span className="text-2xl sm:text-lg">{gradient}</span>
                             </li>
                         ))}
                     </ul>
-                    <ul className="w-1/2">
+                    <ul className="w-1/2 sm:w-1/2">
                         {gradients.slice(halfOfGradient).map((gradient, index) => (
                             <li key={index + halfOfGradient} className="flex justify-between px-1 py-2">
-                                <span>{gradient}</span>
+                                <span className="text-2xl sm:text-lg">{gradient}</span>
                             </li>
                         ))}
                     </ul>
@@ -138,11 +140,11 @@ const Step = (props) => {
     }
     return (
         <div style={stepStyle}>
-            <p className="mb-3">조리순서</p>
+            <p className="font-semibold mb-3 text-2xl sm:text-lg">조리순서</p>
             <ul className="grid gap-y-3">
                 {steps.map((step,index)=>(
                     <li key={index} className="border border-solid rounded p-3">
-                        <span>{step}</span>
+                        <span className="text-2xl sm:text-lg">{step}</span>
                     </li>
                 ))}
             </ul>
