@@ -38,13 +38,13 @@ export default function EditRecipe(){
         const version = 2;            
     
         const db = await openDB(dbName, version, {
-            upgrade(db, oldVersion, newVersion, transaction) {
+            upgrade(db) {
                 if (!db.objectStoreNames.contains('liked')) {
                     db.createObjectStore('liked', { keyPath: 'id' });
                 }
             }
         });
-
+        
         return db;  
     }
     
@@ -168,7 +168,7 @@ const FoodGradients = (props) => {
         const newIngredients = [...ingredients];
         newIngredients[index] = event.target.value;
         props.setIngredients(newIngredients);
-        autoResize(event.target)
+        autoResize(textAreaRefs.current[index])
     };
 
     const addIngredient = () => {
@@ -244,7 +244,7 @@ const Step = (props) => {
         const newSteps = [...steps];
         newSteps[index] = event.target.value;
         props.setSteps(newSteps);
-        autoResize(event.target)
+        autoResize(textAreaRefs.current[index])
     };
 
     const addStep = () => {
