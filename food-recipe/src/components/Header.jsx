@@ -16,7 +16,6 @@ export default function Header() {
     <header
       className = "bg-gradient-to-r from-blue-300 via-blue-400 to-white fixed inset-x-0 top-0 z-50 left-0 text-gray-700 body-font ">
       <div className = "container mx-auto flex flex-wrap p-3 flex-col md:flex-row items-center">
-
         <Link to = "/" className = "flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
           {logo}
           <span className = "ml-3 text-xl text-white font-semibold">음식 추천 서비스</span>
