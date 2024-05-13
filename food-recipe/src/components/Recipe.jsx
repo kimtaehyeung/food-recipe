@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import {useLocation} from "react-router-dom"
 import { openDB } from 'idb';
 import Header from "./Header"
-import axios from "axios"
 
 export default function Recipe(){
     const [recipe,setRecipe] = useState({})
@@ -140,7 +139,7 @@ const likeSave = async (data) => {
     const currentVersion = 2;
 
     const db = await openDB(dbName, currentVersion, {
-        upgrade(db, oldVersion, newVersion, transaction) {
+        upgrade(db) {
             if (!db.objectStoreNames.contains('liked')) {
                 db.createObjectStore('liked', { keyPath: 'id' });
             }

@@ -31,7 +31,7 @@ export default function UserRecipe(){
         const version = 2;            
     
         const db = await openDB(dbName, version, {
-            upgrade(db, oldVersion, newVersion, transaction) {
+            upgrade(db) {
                 if (!db.objectStoreNames.contains('liked')) {
                     db.createObjectStore('liked', { keyPath: 'id' });
                 }
