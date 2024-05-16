@@ -28,7 +28,7 @@ export default function Recipe(){
     }
 
     return (
-        <div className="grid place-items-center bg-slate-100">
+        <div className="grid place-items-center bg-slate-100 w-full">
             <Header/>
             {isloading ? ( 
                 <> isloading... </>
