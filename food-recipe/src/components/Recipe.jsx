@@ -23,22 +23,19 @@ export default function Recipe(){
         getRecipe()
     },[recipeData])
 
-    const recipeMainStyle = {
-        width:'60rem',
-    }
 
     return (
-        <div className="grid place-items-center bg-slate-100 w-full">
+        <div className="grid place-items-center bg-slate-100">
             <Header/>
             {isloading ? ( 
                 <> isloading... </>
             ) : (
-                    <div className="grid place-items-center bg-white shadow w-[70rem] py-[4rem]">
+                    <div className="grid place-items-center bg-white shadow py-[4rem]">
                         <header>
                             <FoodDisplay recipe={recipe}/>
-                            <FoodGradients recipe={recipe}/>
                         </header>
-                        <main className="mt-16" style={recipeMainStyle}>
+                        <main className="mt-8 px-8">
+                            <FoodGradients recipe={recipe}/>
                             <Step recipe={recipe}/>
                             <Like recipe={recipe}/>
                         </main>
@@ -54,9 +51,9 @@ const FoodDisplay = (props) => {
     const imgSource = recipe.ATT_FILE_NO_MAIN
     const name = recipe.RCP_NM
     return  (
-        <div className="flex justify-center mb-16">
+        <div className="flex justify-center mb-8">
             <div className="grid gap-y-3">
-                <img src={imgSource} alt="음식 이미지" className="w-[640px]"/>
+                <img src={imgSource} alt="음식 이미지" className="w-[20rem] sm:w-[30rem]"/>
                 <p className="text-center font-semibold text-2xl">{name}</p>
             </div>
         </div>
@@ -67,11 +64,9 @@ const FoodGradients = (props) => {
     const recipe = props.recipe
     const gradients = recipe.RCP_PARTS_DTLS.split(",")
     const halfOfGradient = Math.ceil(gradients.length/2)
-    const gradientStyle = {
-        width: '60rem',
-    }
+
     return (
-        <div className="border border-solid rounded p-3" style={gradientStyle}>   
+        <div className="border border-solid rounded p-3">   
             <p className="font-semibold text-2xl sm:text-lg">재료</p>
             <div className="flex justify-center w-full">
                 <div className="flex flex-col sm:flex-row justify-between w-full">
@@ -107,12 +102,9 @@ const Step = (props) => {
             break; 
         }
     }
-    const stepStyle = {
-        width:'60rem',
-    }
 
     return (
-        <div style={stepStyle}>
+        <div>
             <p className="font-semibold mb-3 text-2xl sm:text-lg">조리순서</p>
             <ul className="grid gap-y-3">
                 {steps.map((step,index)=>(
