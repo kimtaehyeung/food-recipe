@@ -73,14 +73,14 @@ const FoodGradients = (props) => {
                     <ul className="w-full sm:w-1/2">
                         {gradients.slice(0, halfOfGradient).map((gradient, index) => (
                             <li key={index} className="flex justify-between p-3">
-                                <span className="text-2xl sm:text-lg">{gradient}</span>
+                                <span className="text-xl sm:text-lg">{gradient}</span>
                             </li>
                         ))}
                     </ul>
                     <ul className="w-full sm:w-1/2">
                         {gradients.slice(halfOfGradient).map((gradient, index) => (
                             <li key={index + halfOfGradient} className="flex justify-between p-3">
-                                <span className="text-2xl sm:text-lg">{gradient}</span>
+                                <span className="text-xl sm:text-lg">{gradient}</span>
                             </li>
                         ))}
                     </ul>
@@ -104,12 +104,12 @@ const Step = (props) => {
     }
 
     return (
-        <div>
+        <div className="mt-5">
             <p className="font-semibold mb-3 text-2xl sm:text-lg">조리순서</p>
             <ul className="grid gap-y-3">
                 {steps.map((step,index)=>(
                     <li key={index} className="border border-solid rounded p-3">
-                        <span className="text-2xl sm:text-lg">{step}</span>
+                        <span className="text-xl sm:text-lg">{step}</span>
                     </li>
                 ))}
             </ul>

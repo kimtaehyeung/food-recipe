@@ -1,4 +1,4 @@
-import Login_button from "./Login_button";
+import HeaderLikeBtn from "./HeaderLikeBtn";
 import {Link, useNavigate} from "react-router-dom";
 
 export default function Header() {
