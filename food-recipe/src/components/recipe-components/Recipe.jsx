@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import {useLocation} from "react-router-dom"
 import { openDB } from 'idb';
+import FoodDisplay from "./FoodDisplay";
+import FoodGradients from "./FoodGradients";
+import Step from "./Step";
 import Header from "./Header"
 
 export default function Recipe(){
@@ -46,76 +49,6 @@ export default function Recipe(){
     )
 }
 
-const FoodDisplay = (props) => {
-    const recipe = props.recipe
-    const imgSource = recipe.ATT_FILE_NO_MAIN
-    const name = recipe.RCP_NM
-    return  (
-        <div className="flex justify-center mb-8">
-            <div className="grid gap-y-3">
-                <img src={imgSource} alt="음식 이미지" className="w-[20rem] sm:w-[30rem]"/>
-                <p className="text-center font-semibold text-2xl">{name}</p>
-            </div>
-        </div>
-    )
-}
-
-const FoodGradients = (props) => {
-    const recipe = props.recipe
-    const gradients = recipe.RCP_PARTS_DTLS.split(",")
-    const halfOfGradient = Math.ceil(gradients.length/2)
-
-    return (
-        <div className="border border-solid rounded p-3">   
-            <p className="font-semibold text-2xl sm:text-lg">재료</p>
-            <div className="flex justify-center w-full">
-                <div className="flex flex-col sm:flex-row justify-between w-full">
-                    <ul className="w-full sm:w-1/2">
-                        {gradients.slice(0, halfOfGradient).map((gradient, index) => (
-                            <li key={index} className="flex justify-between p-3">
-                                <span className="text-xl sm:text-lg">{gradient}</span>
-                            </li>
-                        ))}
-                    </ul>
-                    <ul className="w-full sm:w-1/2">
-                        {gradients.slice(halfOfGradient).map((gradient, index) => (
-                            <li key={index + halfOfGradient} className="flex justify-between p-3">
-                                <span className="text-xl sm:text-lg">{gradient}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-
-const Step = (props) => {
-    const recipe = props.recipe
-    let steps = [];
-    for (let i = 1; i <= 20; i++) { 
-        const manualKey = `MANUAL${i.toString().padStart(2, '0')}`; 
-        if (recipe.hasOwnProperty(manualKey) && recipe[manualKey]) { 
-            steps.push(recipe[manualKey]); 
-        } else {
-            break; 
-        }
-    }
-
-    return (
-        <div className="mt-5">
-            <p className="font-semibold mb-3 text-2xl sm:text-lg">조리순서</p>
-            <ul className="grid gap-y-3">
-                {steps.map((step,index)=>(
-                    <li key={index} className="border border-solid rounded p-3">
-                        <span className="text-xl sm:text-lg">{step}</span>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    )
-}
 
 const Like = (props) => {
     const recipe= props.recipe

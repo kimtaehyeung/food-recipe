@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { openDB } from 'idb';
 import { Link, useParams } from "react-router-dom"
 import Header from "./Header";
+import FoodDisplay from "../recipe-components/FoodDisplay";
 
 export default function UserRecipe(){
     const [recipeDB,setRecipeDB] = useState({})
@@ -81,20 +82,6 @@ const EditBtn = (props) => {
     return (
         <div className="w-full flex justify-end mt-2">
             <Link to='../edit_recipe' state={{ recipeId: recipeId }} className="border rounded px-2 py-1 hover:bg-slate-100 text-2xl sm:text-lg">수정하기</Link>
-        </div>
-    )
-}
-
-const FoodDisplay = (props) => {
-    const recipe = props.recipe
-    const imgSource = recipe.ATT_FILE_NO_MAIN
-    const name = recipe.RCP_NM
-    return  (
-        <div className="flex justify-center mb-16">
-            <div className="grid gap-y-3">
-                <img src={imgSource} alt="음식 이미지" className="w-[640px]"/>
-                <p className="text-center font-semibold text-2xl">{name}</p>
-            </div>
         </div>
     )
 }
