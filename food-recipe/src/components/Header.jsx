@@ -21,7 +21,7 @@ export default function Header() {
           <span className = "ml-3 text-xl text-white font-semibold">음식 추천 서비스</span>
         </Link>
         <nav className = "md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <Login_button />
+          <HeaderLikeBtn />
         </nav>
       </div>
     </header>

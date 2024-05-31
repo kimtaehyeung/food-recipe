@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import {useLocation} from "react-router-dom"
 import { openDB } from 'idb';
-import FoodDisplay from "./FoodDisplay";
-import FoodGradients from "./FoodGradients";
-import Step from "./Step";
+import FoodDisplay from "./recipe-components/FoodDisplay";
+import FoodGradients from "./recipe-components/FoodGradients";
+import Step from "./recipe-components/Step";
 import Header from "./Header"
 
 export default function Recipe(){
@@ -38,8 +38,8 @@ export default function Recipe(){
                             <FoodDisplay recipe={recipe}/>
                         </header>
                         <main className="mt-8 px-8">
-                            <FoodGradients recipe={recipe}/>
-                            <Step recipe={recipe}/>
+                            <FoodGradients gradients={recipe.RCP_PARTS_DTLS.split(",")}/>
+                            <Step recipe={recipe} steps={[]}/>
                             <Like recipe={recipe}/>
                         </main>
                     </div>

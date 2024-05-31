@@ -1,6 +1,4 @@
-export default function FoodGradients(props) {
-    const recipe = props.recipe
-    const gradients = recipe.RCP_PARTS_DTLS.split(",")
+export default function FoodGradients({recipe,gradients}) {
     const halfOfGradient = Math.ceil(gradients.length/2)
 
     return (

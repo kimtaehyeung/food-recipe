@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import { openDB } from 'idb';
 import { Link, useParams } from "react-router-dom"
-import Header from "./Header";
+import Header from "../Header";
 import FoodDisplay from "../recipe-components/FoodDisplay";
+import Step from "../recipe-components/Step";
+import FoodGradients from "../recipe-components/FoodGradients";
 
 export default function UserRecipe(){
     const [recipeDB,setRecipeDB] = useState({})
@@ -46,28 +48,20 @@ export default function UserRecipe(){
         fetchLiked(recipeId)
     },[])
 
-    const recipeStyle = {
-        width:'70rem',
-        padding:'4rem 0 4rem 0',
-    }
-    
-    const recipeMainStyle = {
-        width:'60rem',
-    }
-    
+
     return (
         <div className="grid place-items-center bg-slate-100">
             {isloading ? ( 
                 <> isloading... </>
             ) : (
-                    <div className="grid place-items-center bg-white shadow" style={recipeStyle}>
+                    <div className="grid place-items-center bg-white shadow">
                         <Header/>
                         <header>
                             <FoodDisplay recipe={recipeDB}/>
-                            <FoodGradients recipe={recipeDB}/>
+                            <FoodGradients recipe={recipeDB} gradients={recipeDB.RCP_PARTS_DTLS}/>
                         </header>
-                        <main className="mt-16" style={recipeMainStyle}>
-                            <Step recipe={recipeDB}/>
+                        <main className="mt-16">
+                            <Step recipe={recipeDB} steps={recipeDB.steps}/>
                             <EditBtn recipeId={recipeDB.id}/>
                         </main>
                     </div>
@@ -86,55 +80,3 @@ const EditBtn = (props) => {
     )
 }
 
-const FoodGradients = (props) => {
-    const recipe = props.recipe
-    const gradients = recipe.RCP_PARTS_DTLS
-    const halfOfGradient = Math.ceil(gradients.length/2)
-    const gradientStyle = {
-        width: '60rem',
-    }
-    return (
-        <div className="border border-solid rounded p-3" style={gradientStyle}>   
-            <p className="font-semibold text-2xl sm:text-lg">재료</p>
-            <div className="flex justify-center w-full">
-                <div className="flex flex-col sm:flex-row justify-between w-full">
-                    <ul className="w-1/2 sm:w-1/2">
-                        {gradients.slice(0, halfOfGradient).map((gradient, index) => (
-                            <li key={index} className="flex justify-between px-1 py-2">
-                                <span className="text-2xl sm:text-lg">{gradient}</span>
-                            </li>
-                        ))}
-                    </ul>
-                    <ul className="w-1/2 sm:w-1/2">
-                        {gradients.slice(halfOfGradient).map((gradient, index) => (
-                            <li key={index + halfOfGradient} className="flex justify-between px-1 py-2">
-                                <span className="text-2xl sm:text-lg">{gradient}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-
-const Step = (props) => {
-    const recipe = props.recipe
-    const steps = recipe.steps
-    const stepStyle = {
-        width:'60rem',
-    }
-    return (
-        <div style={stepStyle}>
-            <p className="font-semibold mb-3 text-2xl sm:text-lg">조리순서</p>
-            <ul className="grid gap-y-3">
-                {steps.map((step,index)=>(
-                    <li key={index} className="border border-solid rounded p-3">
-                        <span className="text-2xl sm:text-lg">{step}</span>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    )
-}

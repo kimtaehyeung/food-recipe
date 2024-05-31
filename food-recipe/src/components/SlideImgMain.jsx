@@ -4,7 +4,7 @@ import DataContext from "../context/DataContext";
 import IngredientContext from "../context/IngredientContext";
 
 
-export default function SlideImg_main({type, text, onClick}) {
+export default function SlideImgMain({type, text, onClick}) {
 
   const data = useContext(DataContext);
 

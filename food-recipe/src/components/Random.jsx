@@ -2,7 +2,7 @@ import Header from "./Header";
 import DataContext from "../context/DataContext";
 import SlideImg_Random_Top from "./SlideImg_Random_Top";
 import SlideImg_Random_Bottom from "./SlideImg_Random_Bottom";
-import SlideImg_Main from "./SlideImg_main";
+import SlideImgMain from "./SlideImgMain";
 import { useContext, useEffect, useState } from "react";
 
 export default function Random() {

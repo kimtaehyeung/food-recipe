@@ -1,8 +1,9 @@
 import {useContext} from "react";
 import Header from "./Header";
-import SlideImgMain from "./SlideImgMain";
 import {useNavigate} from "react-router-dom";
 import DataContext from "../context/DataContext";
+import SlideImgMain from "./SlideImgMain";
+
 
 export default function Main() {
 

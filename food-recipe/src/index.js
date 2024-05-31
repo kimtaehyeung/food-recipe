@@ -5,7 +5,7 @@ import './index.css';
 import Random from './components/Random';
 import Main from './components/Main';
 import Rank from './components/Rank';
-import Recipe from './components/recipe-components/Recipe';
+import Recipe from './components/Recipe';
 import LikePage from './components/like-components/LikePage';
 import UserRecipe from './components/like-components/UserRecipe';
 import EditRecipe from './components/recipe-components/EditPage';

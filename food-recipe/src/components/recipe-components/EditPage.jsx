@@ -1,7 +1,7 @@
 import { useEffect, useState,useRef } from "react"
 import { useNavigate,useLocation } from "react-router-dom"
 import { openDB } from 'idb';
-import Header from "./Header";
+import Header from "../Header";
 
 export default function EditRecipe(){
     const [recipeDB,setRecipeDB] = useState([])
