@@ -48,7 +48,7 @@ export default function UserRecipe(){
         fetchLiked(recipeId)
     },[])
 
-
+    console.log(recipeDB)
     return (
         <div className="grid place-items-center bg-slate-100">
             {isloading ? ( 
@@ -58,9 +58,9 @@ export default function UserRecipe(){
                         <Header/>
                         <header>
                             <FoodDisplay recipe={recipeDB}/>
-                            <FoodGradients recipe={recipeDB} gradients={recipeDB.RCP_PARTS_DTLS}/>
                         </header>
-                        <main className="mt-16">
+                        <main className="mt-8 px-8">
+                            <FoodGradients recipe={recipeDB} gradients={recipeDB.RCP_PARTS_DTLS}/>
                             <Step recipe={recipeDB} steps={recipeDB.steps}/>
                             <EditBtn recipeId={recipeDB.id}/>
                         </main>

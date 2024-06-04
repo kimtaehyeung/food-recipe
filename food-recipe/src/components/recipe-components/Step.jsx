@@ -1,12 +1,12 @@
 export default function Step({recipe,steps}) {
-    if(steps=[]){
-        for (let i = 1; i <= 20; i++) { 
-            const manualKey = `MANUAL${i.toString().padStart(2, '0')}`; 
-            if (recipe.hasOwnProperty(manualKey) && recipe[manualKey]) { 
-                steps.push(recipe[manualKey]); 
-            } else {
-                break; 
-            }
+
+    console.log(recipe)
+    for (let i = 1; i <= 20; i++) { 
+        const manualKey = `MANUAL${i.toString().padStart(2, '0')}`; 
+        if (recipe.hasOwnProperty(manualKey) && recipe[manualKey]) { 
+            steps.push(recipe[manualKey]); 
+        } else {
+            break; 
         }
     }
     
