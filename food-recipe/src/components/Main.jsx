@@ -21,7 +21,7 @@ export default function Main() {
   }
   return (<>
       <Header />
-      <div className = "bg-gradient-to-r from-blue-300 via-blue-400 to-white p-3">
+      <div className = "bg-gradient-to-r from-blue-300 via-blue-400 to-white px-3">
         {data.length === 0 ? <div></div> : <SlideImgMain type = {"main"} />}
         <div
           className = "flex gap-4 flex-col sm:flex-row justify-center items-center space-y-4 mb-0 sm:space-y-0 sm:space-x-4 ">

@@ -84,7 +84,8 @@ export default function SlideImgMain({type, text, onClick}) {
             </div>
             : (text ?
               <div className = "absolute inset-0 z-10 flex justify-center items-center w-full h-full">
-                <div className = "text-black bg-violet-50 bg-opacity-50 rounded-b text-3xl">
+                {/* hovering 효과 추가 */}
+                <div className = "text-black text-bold rounded-b text-3xl">
                   {text}
                 </div>
               </div>
@@ -100,7 +101,8 @@ export default function SlideImgMain({type, text, onClick}) {
             <img
               key = {index}
               src = {el}
-              className = {`transition-opacity duration-1000 ease-linear object-cover w-full h-full rounded-3xl border-2 border-white absolute ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+              // 이미지 테두리 빈틈 제거
+              className = {`transition-opacity duration-1000 ease-linear w-full h-full rounded-3xl border-2 absolute ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
               alt = "슬라이드 이미지"
             />
 

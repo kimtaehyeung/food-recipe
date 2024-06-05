@@ -1,6 +1,6 @@
 export default function Step({recipe,steps}) {
 
-    console.log(recipe)
+    console.log(steps)
     for (let i = 1; i <= 20; i++) { 
         const manualKey = `MANUAL${i.toString().padStart(2, '0')}`; 
         if (recipe.hasOwnProperty(manualKey) && recipe[manualKey]) { 

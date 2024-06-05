@@ -33,7 +33,7 @@ export default function Recipe(){
             {isloading ? ( 
                 <> isloading... </>
             ) : (
-                    <div className="grid place-items-center bg-white shadow py-[4rem]">
+                <div className="grid place-items-center bg-white shadow py-[4rem]">
                         <header>
                             <FoodDisplay recipe={recipe}/>
                         </header>

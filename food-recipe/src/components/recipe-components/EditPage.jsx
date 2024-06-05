@@ -2,6 +2,7 @@ import { useEffect, useState,useRef } from "react"
 import { useNavigate,useLocation } from "react-router-dom"
 import { openDB } from 'idb';
 import Header from "../Header";
+import FoodDisplay from "../recipe-components/FoodDisplay"
 
 export default function EditRecipe(){
     const [recipeDB,setRecipeDB] = useState([])
@@ -52,26 +53,19 @@ export default function EditRecipe(){
         fetchLiked()
     },[])
 
-    const recipeStyle = {
-        width:'70rem',
-        padding:'4rem 0 4rem 0',
-    }
-    const recipeMainStyle = {
-        width:'60rem',
-    }
 
     return (
         <div className="grid place-items-center bg-slate-100">
+            <Header/>
             {isloading ? ( 
                 <> isloading... </>
             ) : (
-                    <div className="grid place-items-center bg-white shadow" style={recipeStyle}>
-                        <Header/>
+                    <div className="grid place-items-center bg-white shadow" >
                         <header>
                             <FoodDisplay recipe={recipeDB}/>
-                            <FoodGradients recipe={recipeDB} ingredients={ingredients} setIngredients={setIngredients}/>
                         </header>
-                        <main className="mt-16" style={recipeMainStyle}>
+                        <main className="mt-8 px-8">
+                            <FoodGradients recipe={recipeDB} ingredients={ingredients} setIngredients={setIngredients}/>
                             <Step recipe={recipeDB} steps={steps} setSteps={setSteps}/>
                             <UpdateBtn recipe={recipeDB} ingredients={ingredients} steps={steps}/>
                         </main>
@@ -128,21 +122,6 @@ const EditedlikeSave = async (data) => {
 };
 
 
-const FoodDisplay = (props) => {
-    const recipe = props.recipe
-    const imgSource = recipe.ATT_FILE_NO_MAIN
-    const name = recipe.RCP_NM
-    console.log(imgSource)
-    return  (
-        <div className="flex justify-center mb-16">
-            <div className="grid gap-y-3">
-                <img src={imgSource} alt="음식 이미지" className="w-[640px]"/>
-                <p className="text-center font-semibold text-2xl">{name}</p>
-            </div>
-        </div>
-    )
-}
-
 const autoResize = (textarea) => {
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight + 'px';
@@ -160,9 +139,6 @@ const FoodGradients = (props) => {
         });
     }, [props.steps]);
 
-    const ingredientStyle = {
-        width: '60rem',
-    }
 
     const handleIngredientChange = (index, event) => {
         const newIngredients = [...ingredients];
@@ -182,7 +158,7 @@ const FoodGradients = (props) => {
     };
 
     return (
-        <div className="border border-solid rounded p-3" style={ingredientStyle}>   
+        <div className="border border-solid rounded p-3">   
             <div className="w-full flex px-2 mb-3">
                 <p className="font-semibold text-2xl sm:text-lg">재료</p>
                 <button onClick={addIngredient} className="border rounded hover:bg-slate-100 px-1 ms-3 text-2xl sm:text-lg">추가하기</button>
@@ -236,9 +212,6 @@ const Step = (props) => {
         });
     }, [props.steps]); 
 
-    const stepStyle = {
-        width:'60rem',
-    }
 
     const handleStepChange = (index, event) => {
         const newSteps = [...steps];
@@ -257,7 +230,7 @@ const Step = (props) => {
     };
 
     return (
-        <div style={stepStyle}>
+        <div>
             <div className="w-full flex mb-5">
                 <p className="font-semibold text-2xl sm:text-lg">조리순서</p>
                 <button onClick={addStep} className="px-1 border rounded hover:bg-slate-100 ms-3 text-2xl sm:text-lg">추가하기</button>
